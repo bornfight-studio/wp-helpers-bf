@@ -1,5 +1,5 @@
 <?php
-namespace degordian\wpHelpers;
+namespace bornfight\wpHelpers;
 
 class WPSocialSharer extends SocialSharer
 {
