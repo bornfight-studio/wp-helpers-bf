@@ -1,23 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * Date: 16/05/2017
- * Time: 12:29
- */
 
-namespace degordian\wpHelpers;
+namespace bornfight\wpHelpers;
 
 class FlexibleLayoutRenderer
 {
-    private $basePath = '';
+    private $base_path = '';
 
     /**
      * FlexibleLayoutRenderer constructor.
-     * @param string $basePath
+     *
+     * @param string $base_path
      */
-    public function __construct($basePath)
+    public function __construct($base_path)
     {
-        $this->basePath = $basePath;
+        $this->base_path = $base_path;
     }
 
     public function render($data)
@@ -25,7 +21,7 @@ class FlexibleLayoutRenderer
         $index = 0;
         foreach ($data as $layout) {
             get_partial(
-                $this->getPartialPath($layout['acf_fc_layout']),
+                $this->get_partial_path($layout['acf_fc_layout']),
                 array_merge(
                     $layout,
                     [
@@ -37,8 +33,8 @@ class FlexibleLayoutRenderer
         }
     }
 
-    private function getPartialPath($partialName)
+    private function get_partial_path($partial_name)
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . $partialName;
+        return $this->base_path . DIRECTORY_SEPARATOR . $partial_name;
     }
 }

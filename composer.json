@@ -1,17 +1,17 @@
 {
-    "name": "degordian/wp-helpers",
-    "description": "Standard package for WP development used at Degordian",
+    "name": "bornfight/wp-helpers",
+    "description": "Standard package for WP development used at Bornfight",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "WP team",
-            "email": "wpadmin@degordian.com"
+            "email": "wpadmin@bornfight.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "degordian\\wpHelpers\\": "src"
+            "bornfight\\wpHelpers\\": "src"
         }
     }
 }

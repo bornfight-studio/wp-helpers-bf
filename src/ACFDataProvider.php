@@ -1,6 +1,6 @@
 <?php
 
-namespace degordian\wpHelpers;
+namespace bornfight\wpHelpers;
 
 /**
  * Class ACFDataProvider
@@ -37,7 +37,7 @@ class ACFDataProvider
     /**
      * @return ACFDataProvider|null
      */
-    public static function getInstance()
+    public static function get_instance()
     {
         if (self::$instance === null) {
             self::$instance = new ACFDataProvider();
@@ -52,40 +52,41 @@ class ACFDataProvider
      * @param bool $prefixed
      * @return bool|mixed|null
      */
-    public function getOptionField($name, $prefixed = true)
+    public function get_option_field($name, $prefixed = true)
     {
-        return $this->getField($name, self::OPTION, $prefixed);
+        return $this->get_field($name, self::OPTION, $prefixed);
     }
 
     /**
      * @param $name
-     * @param bool $postID
+     * @param bool $post_id
      * @param bool $prefixed
+     *
      * @return bool|mixed|null
      */
-    public function getField($name, $postID = false, $prefixed = true)
+    public function get_field($name, $post_id = false, $prefixed = true)
     {
-        $postID = $postID !== false ? $postID : get_the_ID();
+        $post_id = $post_id !== false ? $post_id : get_the_ID();
         $key = ($prefixed ? $this->prefix : '' ) . $name;
 
-        $cacheKey = 'field_' . $key . '_' . $postID;
-        $fieldsCacheKey = 'fields_' . $postID;
+        $cache_key = 'field_' . $key . '_' . $post_id;
+        $fields_cache_key = 'fields_' . $post_id;
 
-        if (isset($this->fields[$cacheKey])) {
-            return $this->fields[$cacheKey];
-        } elseif (isset($this->fields[$fieldsCacheKey]) && isset($this->fields[$fieldsCacheKey][$key])) {
-            return $this->fields[$fieldsCacheKey][$key];
+        if (isset($this->fields[$cache_key])) {
+            return $this->fields[$cache_key];
+        } elseif (isset($this->fields[$fields_cache_key]) && isset($this->fields[$fields_cache_key][$key])) {
+            return $this->fields[$fields_cache_key][$key];
         }
 
-        $this->fields[$cacheKey] = get_field($key, $postID);
-        return $this->fields[$cacheKey];
+        $this->fields[$cache_key] = get_field($key, $post_id);
+        return $this->fields[$cache_key];
     }
 
     /**
      * @param string $prefix
      * @return $this
      */
-    public function setPrefix($prefix)
+    public function set_prefix($prefix)
     {
         $this->prefix = $prefix;
         return $this;
@@ -94,36 +95,37 @@ class ACFDataProvider
     /**
      * @return $this
      */
-    public function clearPrefix()
+    public function clear_prefix()
     {
         $this->prefix = '';
         return $this;
     }
 
     /**
-     * @param bool $postID
+     * @param bool $post_id
+     *
      * @return array|bool
      */
-    public function getFields($postID = false)
+    public function get_fields($post_id = false)
     {
-        $postID = $postID !== false ? $postID : get_the_ID();
-        $key = 'fields_' . $postID;
+        $post_id = $post_id !== false ? $post_id : get_the_ID();
+        $key = 'fields_' . $post_id;
         if (isset($this->fields[$key])) {
             return $this->fields[$key];
         }
-        $this->fields[$key] = get_fields($postID);
+        $this->fields[$key] = get_fields($post_id);
 
         return $this->fields[$key];
     }
 
-    public function getUserField($name, $userID = null, $prefixed = true)
+    public function get_user_field($name, $user_id = null, $prefixed = true)
     {
-        if ($userID === null && is_single()) {
-            $userID = get_the_author_meta('ID');
+        if ($user_id === null && is_single()) {
+            $user_id = get_the_author_meta('ID');
         }
 
-        if ($userID) {
-            return $this->getField($name, 'user_' . $userID, $prefixed);
+        if ($user_id) {
+            return $this->get_field($name, 'user_' . $user_id, $prefixed);
         }
 
         return '';

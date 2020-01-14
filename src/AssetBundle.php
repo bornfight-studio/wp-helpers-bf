@@ -1,34 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * Date: 24/07/2017
- * Time: 15:34
- */
 
-namespace degordian\wpHelpers;
+namespace bornfight\wpHelpers;
 
 class AssetBundle
 {
-    protected static $includeBasePath = '/static/';
+    protected static $include_base_path = '/static/';
 
     public $js = [];
     public $css = [];
 
-    public $asyncCss = false;
+    public $async_css = false;
 
-    public function getBasePath()
+    public function get_base_path()
     {
-        return INCLUDE_URL . self::$includeBasePath;
+        return INCLUDE_URL . self::$include_base_path;
     }
 
     public static function register()
     {
         $bundle = new static();
-        $bundle->enqueueScripts();
-        $bundle->enqueueStyles();
+        $bundle->enqueue_scripts();
+        $bundle->enqueue_styles();
     }
 
-    protected function enqueueScripts()
+    protected function enqueue_scripts()
     {
         foreach ($this->js as $handle => $data) {
             if (isset($data['path']) === false) {
@@ -37,15 +32,15 @@ class AssetBundle
 
             $path = $data['path'];
             $version = isset($data['version']) ? $data['version'] : 1.0;
-            $inFooter = isset($data['inFooter']) ? $data['inFooter'] : true;
+            $in_footer = isset($data['in_footer']) ? $data['in_footer'] : true;
 
-            wp_enqueue_script($handle, $this->getBasePath() . $path, [], $version, $inFooter);
+            wp_enqueue_script($handle, $this->get_base_path() . $path, [], $version, $in_footer);
         }
     }
 
-    protected function enqueueStyles()
+    protected function enqueue_styles()
     {
-        if ($this->asyncCss) {
+        if ($this->async_css) {
             add_action('wp_head', function () {
                 ?>
                 <script>
@@ -63,13 +58,13 @@ class AssetBundle
                     }
                     // CSS DEV
                     <?php foreach ($this->css as $handle => $data) { ?>
-                        loadCSS("<?= $this->getBasePath() . $data['path']; ?>");
+                        loadCSS("<?= $this->get_base_path() . $data['path']; ?>");
                     <?php } ?>
                 </script>
                 <noscript>
                     <!-- CSS DEV -->
                     <?php foreach ($this->css as $handle => $data) { ?>
-                        <link rel="stylesheet" href="<?= $this->getBasePath() . $data['path']; ?>">
+                        <link rel="stylesheet" href="<?= $this->get_base_path() . $data['path']; ?>">
                     <?php } ?>
                 </noscript>
                 <?php
@@ -82,9 +77,9 @@ class AssetBundle
 
                 $path = $data['path'];
                 $version = isset($data['version']) ? $data['version'] : 1.0;
-                $inFooter = isset($data['inFooter']) ? $data['inFooter'] : true;
+                $in_footer = isset($data['in_footer']) ? $data['in_footer'] : true;
 
-                wp_enqueue_style($handle, $this->getBasePath() . $path, [], $version, $inFooter);
+                wp_enqueue_style($handle, $this->get_base_path() . $path, [], $version, $in_footer);
             }
         }
     }

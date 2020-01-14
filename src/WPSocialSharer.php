@@ -3,67 +3,59 @@ namespace degordian\wpHelpers;
 
 class WPSocialSharer extends SocialSharer
 {
-    public function getFBShareLink($url = null)
+    public function get_fb_share_link($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getFBShareLink($url);
+        return parent::get_fb_share_link($url);
     }
 
-    public function getTwitterShareLink($url = null)
+    public function get_twitter_share_link($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getTwitterShareLink($url);
+        return parent::get_twitter_share_link($url);
     }
 
-    public function getLinkedInShareLink($url = null)
+    public function get_linkedin_share_link($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getLinkedInShareLink($url);
+        return parent::get_linkedin_share_link($url);
     }
 
-    public function getGooglePlusShareLink($url = null)
+    public function get_email_share_link($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getGooglePlusShareLink($url);
+        return parent::get_email_share_link($url);
     }
 
-    public function getEmailShareLink($url = null)
+    public function get_fb_share_count($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getEmailShareLink($url);
+        return parent::get_fb_share_count($url);
     }
 
-    public function getFBShareCount($url = null)
+    public function get_twitter_share_count($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getFBShareCount($url);
+        return parent::get_twitter_share_count($url);
     }
 
-    public function getTwitterShareCount($url = null)
+    public function get_linkedin_share_count($url = null)
     {
         if ($url === null) {
             $url = get_permalink();
         }
-        return parent::getTwitterShareCount($url);
-    }
-
-    public function getLinkedInShareCount($url = null)
-    {
-        if ($url === null) {
-            $url = get_permalink();
-        }
-        return parent::getLinkedInShareCount($url);
+        return parent::get_linkedin_share_count($url);
     }
 }
