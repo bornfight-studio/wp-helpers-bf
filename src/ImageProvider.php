@@ -19,7 +19,7 @@ class ImageProvider {
 	/**
 	 * @var array
 	 */
-	private static array $config;
+	private static $config;
 	
 	/**
 	 * @var null
