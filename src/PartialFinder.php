@@ -17,6 +17,8 @@ class PartialFinder {
 	private $partial_folder;
 	private $template_directory_folder;
 
+	public const PARTIAL_FOLDER = 'partials';
+
 	private function __construct() {
 	}
 
@@ -31,14 +33,6 @@ class PartialFinder {
 		return self::$instance;
 	}
 
-
-	public function set_settings( string $partial_folder, string $template_directory_folder ) {
-		$this->partial_folder            = $partial_folder;
-		$this->template_directory_folder = $template_directory_folder;
-
-		return $this;
-	}
-
 	/**
 	 * @param string $partial
 	 * @param string $folder
@@ -47,11 +41,10 @@ class PartialFinder {
 	 * @throws Exception
 	 */
 	public function get_partial_path( string $partial, string $folder = '' ): string {
-		if ( empty( $folder ) ) {
-			$folder = $this->partial_folder;
-		}
+		$folder             = $this->get_partial_folder( $folder );
+		$template_directory = $this->get_template_directory_folder();
 
-		$file_path = $this->template_directory_folder . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $partial . '.php';
+		$file_path = $template_directory . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $partial . '.php';
 
 		if ( ! file_exists( $file_path ) ) {
 			throw new Exception( 'Partial file does not exists: ' . $file_path );
@@ -112,4 +105,48 @@ class PartialFinder {
 		return ob_get_clean();
 	}
 	// @codingStandardsIgnoreEnd
+
+
+	/**
+	 * @param string $partial_folder
+	 * @param string $template_directory_folder
+	 *
+	 * set custom partial and template directory folder
+	 *
+	 * @return $this
+	 */
+	public function set_settings( string $partial_folder, string $template_directory_folder ) {
+		$this->partial_folder            = $partial_folder;
+		$this->template_directory_folder = $template_directory_folder;
+
+		return $this;
+	}
+
+	/**
+	 * @param string $folder
+	 *
+	 * @return string
+	 */
+	private function get_partial_folder( string $folder ): string {
+		if ( ! empty( $folder ) ) {
+			return $folder;
+		}
+
+		if ( empty( $this->partial_folder ) ) {
+			$this->partial_folder = self::PARTIAL_FOLDER;
+		}
+
+		return $this->partial_folder;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function get_template_directory_folder(): string {
+		if ( empty( $this->template_directory_folder ) ) {
+			$this->template_directory_folder = get_template_directory();
+		}
+
+		return $this->template_directory_folder;
+	}
 }
