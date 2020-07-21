@@ -41,10 +41,7 @@ class PartialFinder {
 	 * @throws Exception
 	 */
 	public function get_partial_path( string $partial, string $folder = '' ): string {
-		$folder             = $this->get_partial_folder( $folder );
-		$template_directory = $this->get_template_directory_folder();
-
-		$file_path = $template_directory . DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR . $partial . '.php';
+		$file_path = $this->get_template_directory_folder() . DIRECTORY_SEPARATOR . $this->get_partial_folder( $folder ) . DIRECTORY_SEPARATOR . $partial . '.php';
 
 		if ( ! file_exists( $file_path ) ) {
 			throw new Exception( 'Partial file does not exists: ' . $file_path );
