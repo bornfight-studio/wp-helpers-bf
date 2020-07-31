@@ -32,9 +32,9 @@ class PluginPartialFinder {
 		return self::$instance;
 	}
 
-	public function get_partial_path( $partial, $folder ): string {
+	public function get_partial_path( $partial, $folder, $plugin_main_directory ): string {
 		$folder_path = $this->get_folder_path( $folder );
-		$file_path   = plugin_dir_path( __FILE__ ) . DIRECTORY_SEPARATOR . $folder_path . DIRECTORY_SEPARATOR . $partial . '.php';
+		$file_path   = $plugin_main_directory . DIRECTORY_SEPARATOR . $folder_path . DIRECTORY_SEPARATOR . $partial . '.php';
 		if ( ! file_exists( $file_path ) ) {
 			throw new Exception( 'Partial file does not exist: ' . $file_path );
 		}
@@ -49,11 +49,13 @@ class PluginPartialFinder {
 	 * @param bool $return
 	 * @param string $folder
 	 *
+	 * @param string $plugin_main_directory
+	 *
 	 * @return false|string
 	 * @throws Exception
 	 */
-	public function get_partial( $partial, $data = null, $return = false, $folder = self::ADMIN_PARTIAL_FOLDER ) {
-		$file_path = $this->get_partial_path( $partial, $folder );
+	public function get_partial( $partial, $data = null, $return = false, $folder = self::ADMIN_PARTIAL_FOLDER, $plugin_main_directory = '' ) {
+		$file_path = $this->get_partial_path( $partial, $folder, $plugin_main_directory );
 
 		if ( $return ) {
 			return $this->get_internal( $file_path, $data );
