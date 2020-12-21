@@ -35,6 +35,18 @@ class AssetBundle
             $in_footer = isset($data['in_footer']) ? $data['in_footer'] : true;
 
             wp_enqueue_script($handle, $this->get_base_path() . $path, [], $version, $in_footer);
+
+	        if ( isset( $data['localize'] ) ) {
+		        if ( isset( $data['localize']['object'] ) === false ) {
+			        throw new \Exception( 'Missing object name for localize ' . $handle );
+		        }
+
+		        $localize_data = isset( $data['localize']['data'] ) ? $data['localize']['data'] : array();
+
+		        wp_localize_script( $handle, $data['localize']['object'],
+			        $localize_data
+		        );
+	        }
         }
     }
 
