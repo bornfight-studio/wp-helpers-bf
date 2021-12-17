@@ -39,6 +39,8 @@ class AssetBundle {
 				$version .= sprintf( '.%d', filemtime( $this->get_base_path() . $path ) );
 			}
 
+			wp_enqueue_script( $handle, $this->get_base_path() . $path, [], $version, $in_footer );
+
 			if ( isset( $data['localize'] ) ) {
 				if ( isset( $data['localize']['object'] ) === false ) {
 					throw new \Exception( 'Missing object name for localize ' . $handle );
@@ -49,7 +51,6 @@ class AssetBundle {
 				wp_localize_script( $handle, $data['localize']['object'], $localize_data );
 			}
 
-			wp_enqueue_script( $handle, $this->get_base_path() . $path, [], $version, $in_footer );
 		}
 	}
 
