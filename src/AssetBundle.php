@@ -39,7 +39,7 @@ class AssetBundle {
 				$version .= sprintf( '.%d', filemtime( $this->get_base_path() . $path ) );
 			}
 
-			wp_enqueue_script( $handle, $this->get_base_path() . $path, [], $version, $in_footer );
+			wp_enqueue_script( $handle, $this->get_base_url() . $path, [], $version, $in_footer );
 
 			if ( isset( $data['localize'] ) ) {
 				if ( isset( $data['localize']['object'] ) === false ) {
