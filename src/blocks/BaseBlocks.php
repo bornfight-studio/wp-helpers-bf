@@ -89,7 +89,7 @@ abstract class BaseBlocks {
 		if ( ! empty( $block_editor_context->post ) ) {
 			array_push( $block_categories, array(
 				'slug'  => 'bornfight-blocks',
-				'title' => __( 'Bornfight', 'wp-bornfight-helper' ),
+				'title' => __( 'Bornfight', 'wp-helpers-bf' ),
 				'icon'  => null,
 			) );
 		}

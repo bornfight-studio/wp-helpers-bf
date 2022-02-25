@@ -21,31 +21,31 @@ class JSONHelper {
 				$error = '';
 				break;
 			case JSON_ERROR_DEPTH:
-				$error = esc_html__( 'The maximum stack depth has been exceeded.', 'eightshift-libs' );
+				$error = esc_html__( 'The maximum stack depth has been exceeded.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_STATE_MISMATCH:
-				$error = esc_html__( 'Invalid or malformed JSON.', 'eightshift-libs' );
+				$error = esc_html__( 'Invalid or malformed JSON.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_CTRL_CHAR:
-				$error = esc_html__( 'Control character error, possibly incorrectly encoded.', 'eightshift-libs' );
+				$error = esc_html__( 'Control character error, possibly incorrectly encoded.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_SYNTAX:
-				$error = esc_html__( 'Syntax error, malformed JSON.', 'eightshift-libs' );
+				$error = esc_html__( 'Syntax error, malformed JSON.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_UTF8:
-				$error = esc_html__( 'Malformed UTF-8 characters, possibly incorrectly encoded.', 'eightshift-libs' );
+				$error = esc_html__( 'Malformed UTF-8 characters, possibly incorrectly encoded.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_RECURSION:
-				$error = esc_html__( 'One or more recursive references in the value to be encoded.', 'eightshift-libs' );
+				$error = esc_html__( 'One or more recursive references in the value to be encoded.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_INF_OR_NAN:
-				$error = esc_html__( 'One or more NAN or INF values in the value to be encoded.', 'eightshift-libs' );
+				$error = esc_html__( 'One or more NAN or INF values in the value to be encoded.', 'wp-helpers-bf' );
 				break;
 			case JSON_ERROR_UNSUPPORTED_TYPE:
-				$error = esc_html__( 'A value of a type that cannot be encoded was given.', 'eightshift-libs' );
+				$error = esc_html__( 'A value of a type that cannot be encoded was given.', 'wp-helpers-bf' );
 				break;
 			default:
-				$error = esc_html__( 'Unknown JSON error occurred.', 'eightshift-libs' );
+				$error = esc_html__( 'Unknown JSON error occurred.', 'wp-helpers-bf' );
 				break;
 		}
 
