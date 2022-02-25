@@ -64,11 +64,7 @@ abstract class ACFBaseBlocks extends BaseBlocks {
 	}
 
 	public function get_block_thumbnail( string $block_name ): string {
-		$path = $this->get_block_thumbnail( $block_name );
-
-		if ( ! is_readable( $path ) ) {
-			return '';
-		}
+		$path = $this->get_block_thumbnail_path( $block_name );
 
 		return '<img src="' . $path . '" style="width:100%; height:auto;">';
 	}
