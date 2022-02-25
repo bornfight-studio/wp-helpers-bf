@@ -1,0 +1,15 @@
+{
+  "name": "test-block",
+  "title": "Test Block",
+  "description": "Test Block",
+  "category": "bornfight-blocks",
+  "icon": null,
+  "keywords": [
+    "test"
+  ],
+  "example": {
+    "attributes": {
+      "mode": "preview"
+    }
+  }
+}

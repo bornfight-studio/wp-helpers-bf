@@ -13,5 +13,8 @@
         "psr-4": {
             "bornfight\\wpHelpers\\": "src"
         }
-    }
+    },
+  "require": {
+    "ext-json": "*"
+  }
 }
