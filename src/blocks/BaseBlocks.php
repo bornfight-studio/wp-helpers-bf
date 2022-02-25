@@ -20,14 +20,6 @@ abstract class BaseBlocks {
 	 */
 	abstract protected function get_blocks_path(): string;
 
-	/**
-	 * @param array $block
-	 * @param string $content
-	 * @param bool $is_preview
-	 * @param int|string $post_id
-	 */
-	abstract public function render( array $block, string $content = '', bool $is_preview = false, $post_id = 0 ): bool;
-
 	abstract protected function register_blocks(): void;
 
 	abstract protected function register_block( array $block ): void;

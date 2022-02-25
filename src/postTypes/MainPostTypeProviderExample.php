@@ -4,7 +4,7 @@ namespace bornfight\wpHelpers\postTypes;
 
 use bornfight\wpHelpers\services\ServiceInterface;
 
-class RegisterPostTypesExample implements ServiceInterface {
+class MainPostTypeProviderExample implements ServiceInterface {
 	public function register(): void {
 		$this->register_post_types();
 		$this->register_post_type_taxonomies();
