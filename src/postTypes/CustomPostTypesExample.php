@@ -2,7 +2,7 @@
 
 namespace bornfight\wpHelpers\postTypes;
 
-class CustomPostTypes extends PostTypes {
+class CustomPostTypesExample extends PostTypes {
 	public function get_namespace(): string {
 		return __NAMESPACE__ . '\\customPostTypes\\';
 	}

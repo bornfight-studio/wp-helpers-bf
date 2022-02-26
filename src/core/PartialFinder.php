@@ -2,10 +2,6 @@
 
 namespace bornfight\wpHelpers\core;
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
-
 use Exception;
 
 class PartialFinder {

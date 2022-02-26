@@ -1,14 +1,14 @@
 <?php
 
-namespace bornfight\wpHelpers;
+namespace bornfight\wpHelpers\bundles;
 
 class AssetBundle {
 	protected static $include_base_path = '/static/';
 
-	public $js = [];
-	public $css = [];
+	public array $js = array();
+	public array $css = array();
 
-	public $async_css = false;
+	public bool $async_css = false;
 
 	public function get_base_url() {
 		return INCLUDE_URL . self::$include_base_path;
@@ -83,7 +83,7 @@ class AssetBundle {
 					<?php
 					foreach ( $this->css as $handle => $data ) { ?>
                         <link rel="stylesheet" href="<?= $this->get_base_url() . $data['path']; ?>">
-					<?php
+						<?php
 					} ?>
                 </noscript>
 				<?php
