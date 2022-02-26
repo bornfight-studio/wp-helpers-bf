@@ -1,6 +1,6 @@
 <?php
 
-namespace bornfight\wpHelpers;
+namespace bornfight\wpHelpers\acf;
 
 /**
  * Class ACFDataProvider
