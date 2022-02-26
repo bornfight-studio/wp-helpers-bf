@@ -2,16 +2,26 @@
 
 namespace bornfight\wpHelpers\postTypes;
 
+use bornfight\wpHelpers\helpers\AutoloadHelper;
 use bornfight\wpHelpers\services\ServiceInterface;
 
 class MainPostTypeProviderExample implements ServiceInterface {
+	protected AutoloadHelper $autoload_helper;
+
+	public function __construct() {
+		$this->autoload_helper = new AutoloadHelper();
+	}
+
 	public function register(): void {
 		$this->register_post_types();
 		$this->register_post_type_taxonomies();
 	}
 
 	private function register_post_types(): void {
-		$post_types = $this->get_classes( 'customPostTypes' );
+		$namespace = __NAMESPACE__ . '\\customPostTypes\\';
+		$pattern   = trailingslashit( get_stylesheet_directory() ) . 'app/postTypes/customPostTypes';
+
+		$post_types = $this->autoload_helper->get_classes_by_namespace( $namespace, $pattern );
 
 		if ( ! empty( $post_types ) ) {
 			foreach ( $post_types as $post_type ) {
@@ -24,7 +34,10 @@ class MainPostTypeProviderExample implements ServiceInterface {
 	}
 
 	private function register_post_type_taxonomies(): void {
-		$taxonomies = $this->get_classes( 'customTaxonomies' );
+		$namespace = __NAMESPACE__ . '\\customTaxonomies\\';
+		$pattern   = trailingslashit( get_stylesheet_directory() ) . 'app/postTypes/customTaxonomies';
+
+		$taxonomies = $this->autoload_helper->get_classes_by_namespace( $namespace, $pattern );
 
 		if ( ! empty( $taxonomies ) ) {
 			foreach ( $taxonomies as $taxonomy ) {
@@ -35,18 +48,5 @@ class MainPostTypeProviderExample implements ServiceInterface {
 				}
 			}
 		}
-	}
-
-	private function get_classes( string $type ): array {
-		$namespace = __NAMESPACE__ . '\\' . $type . '\\';
-		$pattern   = trailingslashit( get_stylesheet_directory() ) . 'app/postTypes/' . $type;
-
-		return array_map( function ( $class_path ) use ( $namespace ) {
-			$class_name  = explode( '/', $class_path );
-			$last_item   = end( $class_name );
-			$removed_php = str_replace( '.php', '', $last_item );
-
-			return $namespace . $removed_php;
-		}, glob( $pattern . '/*.php' ) );
 	}
 }
