@@ -4,7 +4,7 @@ namespace bornfight\wpHelpers\rest;
 
 use bornfight\wpHelpers\helpers\AutoloadHelper;
 
-class RestApiCustomRoutes {
+abstract class RestApiCustomRoutes {
 	protected AutoloadHelper $autoload_helper;
 
 	public function __construct() {
@@ -15,11 +15,12 @@ class RestApiCustomRoutes {
 		add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 	}
 
-	public function register_rest_routes(): void {
-		$namespace = __NAMESPACE__ . '\\routes\\';
-		$pattern   = trailingslashit( get_stylesheet_directory() ) . 'app/rest/routes';
+	abstract public function get_namespace(): string;
 
-		$routes = $this->autoload_helper->get_classes_by_namespace( $namespace, $pattern );
+	abstract public function get_pattern(): string;
+
+	public function register_rest_routes(): void {
+		$routes = $this->autoload_helper->get_classes_by_namespace( $this->get_namespace(), $this->get_pattern() );
 
 		if ( ! empty( $routes ) ) {
 			foreach ( $routes as $route ) {

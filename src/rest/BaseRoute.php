@@ -3,8 +3,8 @@
 namespace bornfight\wpHelpers\rest;
 
 abstract class BaseRoute {
-	protected function register(): void {
-		register_rest_route( $this->get_namespace(), $this->get_route_slug() );
+	public function register(): void {
+		register_rest_route( $this->get_namespace(), $this->get_route_slug(), $this->get_args() );
 	}
 
 	abstract public function get_namespace(): string;

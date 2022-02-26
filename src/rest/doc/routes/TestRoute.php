@@ -16,12 +16,12 @@ class TestRoute extends BaseRoute {
 		return 'bornfight/v1';
 	}
 
-	protected function get_args(): array {
+	public function get_args(): array {
 		return array(
 			'methods'             => array( 'GET' ),
 			'callback'            => array(
 				new TestCallback(),
-				'filter_post_type'
+				'rest_endpoint'
 			),
 			'permission_callback' => '__return_true',
 		);
