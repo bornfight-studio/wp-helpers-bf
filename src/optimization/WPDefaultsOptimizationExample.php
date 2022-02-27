@@ -2,7 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization;
 
-class BaseWPDefaultsOptimizationExample extends BaseWPDefaultsOptimization {
+class WPDefaultsOptimizationExample extends BaseWPDefaultsOptimization {
 	public function init(): void {
 		$this->deactivate_gutenberg_scripts();
 		$this->deactivate_wp_comments();
