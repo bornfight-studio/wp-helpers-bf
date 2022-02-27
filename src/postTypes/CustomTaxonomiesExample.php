@@ -2,7 +2,9 @@
 
 namespace bornfight\wpHelpers\postTypes;
 
-class CustomTaxonomiesExample extends Taxonomies {
+use bornfight\wpHelpers\services\Service;
+
+class CustomTaxonomiesExample extends Service {
 	public function get_namespace(): string {
 		return __NAMESPACE__ . '\\customTaxonomies\\';
 	}

@@ -2,7 +2,9 @@
 
 namespace bornfight\wpHelpers\rest;
 
-class CustomRoutesExample extends RestApiCustomRoutes {
+use bornfight\wpHelpers\services\Service;
+
+class CustomRoutesExample extends Service {
 	public function get_namespace(): string {
 		return __NAMESPACE__ . '\\routes\\';
 	}

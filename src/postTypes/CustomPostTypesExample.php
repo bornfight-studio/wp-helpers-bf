@@ -2,7 +2,9 @@
 
 namespace bornfight\wpHelpers\postTypes;
 
-class CustomPostTypesExample extends PostTypes {
+use bornfight\wpHelpers\services\Service;
+
+class CustomPostTypesExample extends Service {
 	public function get_namespace(): string {
 		return __NAMESPACE__ . '\\customPostTypes\\';
 	}

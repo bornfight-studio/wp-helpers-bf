@@ -1,8 +1,8 @@
 <?php
 
-namespace bornfight\wpHelpers\helpers;
+namespace bornfight\wpHelpers\services;
 
-class AutoloadHelper {
+abstract class BaseService {
 	public function get_classes_by_namespace( string $namespace, string $pattern ): array {
 		return array_map( function ( $class_path ) use ( $namespace ) {
 			$class_name  = explode( '/', $class_path );

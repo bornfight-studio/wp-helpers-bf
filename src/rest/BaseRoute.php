@@ -4,6 +4,10 @@ namespace bornfight\wpHelpers\rest;
 
 abstract class BaseRoute {
 	public function register(): void {
+		add_action( 'rest_api_init', array( $this, 'register_route' ) );
+	}
+
+	protected function register_route(): void {
 		register_rest_route( $this->get_namespace(), $this->get_route_slug(), $this->get_args() );
 	}
 
