@@ -1,20 +1,21 @@
 {
-    "name": "bornfight/wp-helpers-bf",
-    "description": "Standard package for WP development used at Bornfight",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "WP team",
-            "email": "wpadmin@bornfight.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "bornfight\\wpHelpers\\": "src"
-        }
-    },
+  "name": "bornfight/wp-helpers-bf",
+  "description": "Standard package for WP development used at Bornfight",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "WP team",
+      "email": "wpadmin@bornfight.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "bornfight\\wpHelpers\\": "src"
+    }
+  },
   "require": {
+    "php": "7.4 || 8.0",
     "ext-json": "*"
   }
 }
