@@ -2,9 +2,9 @@
 
 namespace bornfight\wpHelpers\adminMenus\doc\menus;
 
-use bornfight\wpHelpers\adminMenus\BaseACFAdminMenu;
+use bornfight\wpHelpers\adminMenus\ACFBaseAdminMenu;
 
-class ThemeOptionsExample extends BaseACFAdminMenu {
+class ThemeOptionsExample extends ACFBaseAdminMenu {
 	public const MENU_CAPABILITY = 'manage_options';
 	public const MENU_SLUG = 'theme-options';
 	public const MENU_POSITION = 100;

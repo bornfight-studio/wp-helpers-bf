@@ -5,7 +5,7 @@ namespace bornfight\wpHelpers\adminMenus;
 /**
  * @link https://www.advancedcustomfields.com/resources/acf_add_options_page/
  */
-abstract class BaseACFAdminMenu extends BaseAdminMenu {
+abstract class ACFBaseAdminMenu extends BaseAdminMenu {
 	public function register_menu(): void {
 		if ( function_exists( 'acf_add_options_page' ) ) {
 			acf_add_options_page( $this->get_settings() );
