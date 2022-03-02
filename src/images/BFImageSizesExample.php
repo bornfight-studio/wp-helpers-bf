@@ -2,7 +2,7 @@
 
 namespace bornfight\wpHelpers\images;
 
-class BFImageActivateExample extends BFimagePluginActivate {
+class BFImageSizesExample extends BFimageSizes {
 	public function get_image_sizes(): array {
 		return array(
 			'image_200'  => array( 200, 0 ),

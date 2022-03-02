@@ -2,7 +2,7 @@
 
 namespace bornfight\wpHelpers\images;
 
-abstract class BFimagePluginActivate {
+abstract class BFimageSizes {
 	public function init(): void {
 		add_action( 'init', array( $this, 'register_image_sizes' ) );
 	}

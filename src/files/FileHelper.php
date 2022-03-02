@@ -1,18 +1,8 @@
 <?php
 
-namespace bornfight\wpHelpers\images;
+namespace bornfight\wpHelpers\files;
 
-class AttachmentHelper {
-	public function get_attachment_alt_text( int $attachment_id ): string {
-		$alt_text = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
-
-		if ( empty( $alt_text ) ) {
-			return sanitize_title( get_the_title( $attachment_id ) );
-		}
-
-		return $alt_text;
-	}
-
+class FileHelper {
 	/**
 	 * @param int|null $filesize (bytes)
 	 *
