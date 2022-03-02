@@ -9,7 +9,7 @@ class ImageProvider extends BFImagePluginProvider {
 	 *
 	 * @return array
 	 */
-	protected function get_image( ?int $image_id, $image_size ): array {
+	public function get_image( ?int $image_id, $image_size ): array {
 		if ( empty( $image_id ) ) {
 			return array();
 		}
@@ -33,7 +33,7 @@ class ImageProvider extends BFImagePluginProvider {
 	 *
 	 * @return array
 	 */
-	protected function get_featured_image( int $post_id, $image_size ): array {
+	public function get_featured_image( int $post_id, $image_size ): array {
 		return $this->get_image( get_post_thumbnail_id( $post_id ), $image_size );
 	}
 
@@ -42,7 +42,7 @@ class ImageProvider extends BFImagePluginProvider {
 	 *
 	 * @return string
 	 */
-	protected function get_attachment_alt_text( int $attachment_id ): string {
+	public function get_attachment_alt_text( int $attachment_id ): string {
 		$alt_text = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
 
 		if ( empty( $alt_text ) ) {
