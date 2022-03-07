@@ -2,8 +2,8 @@
 
 namespace bornfight\wpHelpers\optimization;
 
-use bornfight\wpHelpers\optimization\plugins\ACFEOptions;
-use bornfight\wpHelpers\optimization\plugins\CF7Options;
+use bornfight\wpHelpers\optimization\wpPlugins\ACFEOptions;
+use bornfight\wpHelpers\optimization\wpPlugins\CF7Options;
 
 abstract class BaseWPPluginsOptimization {
 	protected function deactivate_acfe_options( array $settings = array() ): void {

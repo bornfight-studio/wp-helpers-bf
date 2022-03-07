@@ -1,6 +1,6 @@
 <?php
 
-namespace bornfight\wpHelpers\optimization\plugins;
+namespace bornfight\wpHelpers\optimization\wpPlugins;
 
 use bornfight\wpHelpers\optimization\DeactivateInterface;
 
