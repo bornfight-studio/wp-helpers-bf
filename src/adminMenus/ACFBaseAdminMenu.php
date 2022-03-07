@@ -6,6 +6,10 @@ namespace bornfight\wpHelpers\adminMenus;
  * @link https://www.advancedcustomfields.com/resources/acf_add_options_page/
  */
 abstract class ACFBaseAdminMenu extends BaseAdminMenu {
+	public function register(): void {
+		$this->register_menu();
+	}
+
 	public function register_menu(): void {
 		if ( function_exists( 'acf_add_options_page' ) ) {
 			acf_add_options_page( $this->get_settings() );
@@ -54,7 +58,7 @@ abstract class ACFBaseAdminMenu extends BaseAdminMenu {
 	 * Read more about the available post_id values. Defaults to ‘options’. Added in v5.2.7.
 	 * @return int|string
 	 */
-	protected function get_post_id()  {
+	protected function get_post_id() {
 		return 'options';
 	}
 
@@ -75,7 +79,7 @@ abstract class ACFBaseAdminMenu extends BaseAdminMenu {
 	 *
 	 */
 	protected function get_update_button_label(): string {
-		return __('Update', 'acf');
+		return __( 'Update', 'acf' );
 	}
 
 	/**
@@ -83,6 +87,6 @@ abstract class ACFBaseAdminMenu extends BaseAdminMenu {
 	 * @return string
 	 */
 	protected function get_update_button_message(): string {
-		return __("Options Updated", 'acf');
+		return __( "Options Updated", 'acf' );
 	}
 }
