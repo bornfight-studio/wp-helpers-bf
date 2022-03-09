@@ -10,8 +10,10 @@ abstract class BaseTaxonomy implements ServiceInterface {
 	}
 
 	public function register(): void {
-		register_taxonomy( $this->get_taxonomy_slug(), $this->get_args() );
+		register_taxonomy( $this->get_taxonomy_slug(), $this->get_post_types(), $this->get_args() );
 	}
+
+	abstract public function get_post_types(): array;
 
 	abstract public function get_args(): array;
 
