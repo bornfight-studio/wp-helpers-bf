@@ -46,7 +46,9 @@ abstract class ACFBaseBlocks extends BaseBlocks {
 	 * @param array $block
 	 */
 	public function register_block( array $block ): void {
-		acf_register_block_type( $block );
+		if ( function_exists( 'acf_register_block_type' ) ) {
+			acf_register_block_type( $block );
+		}
 	}
 
 	public function render( array $block, string $content = '', bool $is_preview = false, $post_id = 0 ): bool {
