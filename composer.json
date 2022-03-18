@@ -13,9 +13,5 @@
     "psr-4": {
       "bornfight\\wpHelpers\\": "src"
     }
-  },
-  "require": {
-    "php": ">=7.4 <8.1",
-    "ext-json": "*"
   }
 }
