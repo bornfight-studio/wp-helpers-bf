@@ -19,6 +19,10 @@ class SocialSharer {
 		return sprintf( 'mailto:?to=&body=%s&subject=%s', $url, $title );
 	}
 
+	public function get_reddit_share_link( string $url, string $title = '' ): string {
+		return sprintf( 'https://reddit.com/submit?url=%s&title=%s', $url, $title );
+	}
+
 	public function get_fb_share_count( string $url ): int {
 		$link = sprintf( 'https://graph.facebook.com/?id=%s', $url );
 
