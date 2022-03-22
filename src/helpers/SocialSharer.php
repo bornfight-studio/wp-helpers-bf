@@ -8,15 +8,15 @@ class SocialSharer {
 	}
 
 	public function get_twitter_share_link( string $url ): string {
-		return sprintf( 'https://twitter.com/home?status=%s', $url );
+		return sprintf( 'https://twitter.com/intent/tweet?url=%s', $url );
 	}
 
-	public function get_linkedin_share_link( string $url ): string {
-		return sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s&summary=&source=', $url, 'Mercury Processing' );
+	public function get_linkedin_share_link( string $url, string $title = '' ): string {
+		return sprintf( 'https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s&summary=&source=', $url, $title );
 	}
 
-	public function get_email_share_link( string $url ): string {
-		return sprintf( 'mailto:?to=&body=%s&subject=%s', $url, 'Mercury Processing' );
+	public function get_email_share_link( string $url, string $title = '' ): string {
+		return sprintf( 'mailto:?to=&body=%s&subject=%s', $url, $title );
 	}
 
 	public function get_fb_share_count( string $url ): int {
