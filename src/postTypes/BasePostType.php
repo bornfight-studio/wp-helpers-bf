@@ -62,6 +62,7 @@ abstract class BasePostType implements ServiceInterface {
 			'show_in_nav_menus'   => true,
 			'show_in_rest'        => true,
 			'menu_icon'           => null,
+			'acfe_admin_archive'  => false,
 		);
 	}
 }
