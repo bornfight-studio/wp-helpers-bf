@@ -116,4 +116,12 @@ class ACFDataProvider {
 
 		return '';
 	}
+
+	public function get_archive_field( string $name, string $post_type, bool $prefixed = true ) {
+		if ( empty( $post_type ) ) {
+			return '';
+		}
+
+		return $this->get_field( $name, $post_type . '_archive', $prefixed );
+	}
 }
