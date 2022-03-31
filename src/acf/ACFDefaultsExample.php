@@ -4,7 +4,8 @@ namespace bornfight\wpHelpers\acf;
 
 class ACFDefaultsExample extends ACFDefaultsBase {
 	public function init(): void {
-		$this->add_thumbnails_to_module( array( 'test_modules' => 'Tes Module' ) );
+		$modules_path = trailingslashit( TEMPLATE_PATH ) . 'partials/modules';
+		$this->add_thumbnails_to_module( $this->get_modules($modules_path) );
 
 		// Modules component
 		add_filter( 'acf/load_field/key=field_61e88d15c0d2d', array(

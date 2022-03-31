@@ -14,9 +14,9 @@ class TestTaxonomy extends BaseTaxonomy implements CustomTaxonomiesInterface {
 	}
 
 	// Delete to register this taxonomy
-	public function register(): void {
-
-	}
+//	public function register(): void {
+//
+//	}
 
 	public function get_taxonomy_slug(): string {
 		return self::SLUG;

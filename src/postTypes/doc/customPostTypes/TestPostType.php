@@ -15,9 +15,9 @@ class TestPostType extends BasePostType implements CustomPostTypeInterface {
 	}
 
 	// Remove to register post type
-	public function register(): void {
-
-	}
+//	public function register(): void {
+//
+//	}
 
 	/**
 	 * Change default labels here before return
