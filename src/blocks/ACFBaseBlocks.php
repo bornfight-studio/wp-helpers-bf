@@ -21,6 +21,8 @@ abstract class ACFBaseBlocks extends BaseBlocks {
 
 	abstract public function get_blocks_thumbnail_path(): string;
 
+	abstract public function get_blocks_partial( string $slug, array $block ): void;
+
 	public function get_block_thumbnail_path( string $block_name ): string {
 		return trailingslashit( $this->get_blocks_thumbnail_path() ) . $block_name . '.png';
 	}
@@ -60,7 +62,7 @@ abstract class ACFBaseBlocks extends BaseBlocks {
 			return true;
 		}
 
-		PartialFinder::get_instance()->get_partial( $slug . '/' . $slug, array( 'block' => $block ), false, 'app/blocks/acfBlocks' );
+		$this->get_blocks_partial( $slug, $block );
 
 		return true;
 	}

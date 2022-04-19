@@ -35,6 +35,10 @@ class BlocksExample extends ACFBaseBlocks {
 		return trailingslashit( get_template_directory_uri() ) . 'block-thumbnails/';
 	}
 
+	public function get_blocks_partial( string $slug, array $block ): void {
+//		get_partial($slug . '/' . $slug, array( 'block' => $block ), false, 'app/blocks/acfBlocks');
+	}
+
 	public function get_default_blocks(): array {
 		return array(
 			'core/heading',
