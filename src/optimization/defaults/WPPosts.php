@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\defaults;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class WPPosts implements DeactivateInterface {
+class WPPosts {
 	public function deactivate( array $settings = array() ): void {
 		add_action( 'admin_menu', array( $this, 'remove_default_post_type' ) );
 		add_action( 'admin_bar_menu', array( $this, 'remove_default_post_type_menu_bar' ), 999 );

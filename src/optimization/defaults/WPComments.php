@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\defaults;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class WPComments implements DeactivateInterface {
+class WPComments {
 	public function deactivate( array $settings = array() ): void {
 		add_action( 'widgets_init', array( $this, 'disable_rc_widget' ) );
 		add_filter( 'wp_headers', array( $this, 'filter_wp_headers' ) );

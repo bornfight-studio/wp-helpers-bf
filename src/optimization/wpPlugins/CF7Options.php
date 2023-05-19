@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\wpPlugins;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class CF7Options implements DeactivateInterface {
+class CF7Options {
 	public function deactivate( array $settings = array() ): void {
 		if ( ! empty( $settings['remove_autop'] ) ) {
 			add_filter( 'wpcf7_autop_or_not', '__return_false' );

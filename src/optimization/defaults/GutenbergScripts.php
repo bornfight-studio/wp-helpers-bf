@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\defaults;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class GutenbergScripts implements DeactivateInterface {
+class GutenbergScripts {
 	public function deactivate( array $settings = array() ): void {
 		add_action( 'wp_enqueue_scripts', array( $this, 'remove_wp_block_library_css' ), 100 );
 	}

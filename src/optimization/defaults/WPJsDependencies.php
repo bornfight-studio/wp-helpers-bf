@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\defaults;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class WPJsDependencies implements DeactivateInterface {
+class WPJsDependencies {
 	public function deactivate( array $settings = array() ): void {
 		if ( ! empty( $settings['remove_jquery_migrate'] ) ) {
 			add_action( 'wp_default_scripts', [ $this, 'remove_jquery_migrate' ] );

@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\defaults;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class WPEmbeds implements DeactivateInterface {
+class WPEmbeds {
 	public function deactivate( array $settings = array() ): void {
 		add_action( 'init', [ $this, 'disable_embeds_code_init' ] );
 	}

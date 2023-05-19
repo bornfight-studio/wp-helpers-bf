@@ -1,6 +1,6 @@
 <?php
 
-namespace bornfight\wpHelpers\files;
+namespace bornfight\wpHelpers\helpers;
 
 class FileHelper {
 	/**

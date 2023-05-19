@@ -2,9 +2,7 @@
 
 namespace bornfight\wpHelpers\optimization\defaults;
 
-use bornfight\wpHelpers\optimization\DeactivateInterface;
-
-class WPEmoji implements DeactivateInterface {
+class WPEmoji {
 	public function deactivate( array $settings = array() ): void {
 		/**
 		 * Remove emoji preconnect
