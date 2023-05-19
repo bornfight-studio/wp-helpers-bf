@@ -2,18 +2,18 @@
 
 namespace bornfight\wpHelpers\core;
 
-class ACFDataProvider {
+class ACFProvider {
 	const OPTION = 'option';
 
-	private static ?ACFDataProvider $instance = null;
+	private static ?ACFProvider $instance = null;
 
 	private array $fields = [];
 
 	private function __construct() {}
 
-	public static function get_instance(): ?ACFDataProvider {
+	public static function get_instance(): ?ACFProvider {
 		if ( self::$instance === null ) {
-			self::$instance = new ACFDataProvider();
+			self::$instance = new ACFProvider();
 		}
 
 		return self::$instance;

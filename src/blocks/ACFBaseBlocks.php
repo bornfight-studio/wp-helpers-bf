@@ -19,14 +19,6 @@ abstract class ACFBaseBlocks extends BaseBlocks {
 		return 'edit';
 	}
 
-	abstract public function get_blocks_thumbnail_path(): string;
-
-	abstract public function get_blocks_partial( string $slug, array $block ): void;
-
-	public function get_block_thumbnail_path( string $block_name ): string {
-		return trailingslashit( $this->get_blocks_thumbnail_path() ) . $block_name . '.png';
-	}
-
 	/**
 	 * @throws Exception
 	 */
@@ -53,24 +45,10 @@ abstract class ACFBaseBlocks extends BaseBlocks {
 		}
 	}
 
-	public function render( array $block, string $content = '', bool $is_preview = false, $post_id = 0 ): bool {
+	public function render( array $block, string $content = '', bool $is_preview = false, $post_id = 0 ): void {
 		$slug = str_replace( $this->get_block_namespace(), '', $block['name'] );
 
-		if ( $is_preview ) {
-			echo $this->get_block_thumbnail( $slug );
-
-			return true;
-		}
-
-		$this->get_blocks_partial( $slug, $block );
-
-		return true;
-	}
-
-	public function get_block_thumbnail( string $block_name ): string {
-		$path = $this->get_block_thumbnail_path( $block_name );
-
-		return '<img src="' . $path . '" style="width:100%; height:auto;">';
+		PartialFinder::get_instance()->get_partial( $slug . '/' . $slug, array( 'block' => $block ), false, 'app/blocks/acfBlocks' );
 	}
 
 	public function get_blocks_path(): string {
