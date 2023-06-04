@@ -34,7 +34,7 @@ abstract class BaseBlocks {
 	 *
 	 * @return bool|array Boolean if you want to disable or enable all blocks, or a list of allowed blocks.
 	 */
-	protected function filter_allowed_blocked_types( bool|array $allowed_block_types, WP_Block_Editor_Context $block_editor_context ): bool|array {
+	public function filter_allowed_blocked_types( bool|array $allowed_block_types, WP_Block_Editor_Context $block_editor_context ): bool|array {
 		$blocks = $this->get_default_blocks();
 
 		foreach ( $this->get_blocks() as $block ) {
@@ -50,7 +50,7 @@ abstract class BaseBlocks {
 	 *
 	 * @return array
 	 */
-	protected function filter_block_categories( array $block_categories, WP_Block_Editor_Context $block_editor_context ): array {
+	public function filter_block_categories( array $block_categories, WP_Block_Editor_Context $block_editor_context ): array {
 		if ( ! empty( $block_editor_context->post ) ) {
 			$block_categories[] = array(
 				'slug'  => 'bornfight-blocks',
