@@ -2,50 +2,30 @@
 
 namespace bornfight\wpHelpers\blocks;
 
-use bornfight\wpHelpers\helpers\JSONHelper;
 use WP_Block_Editor_Context;
 
 abstract class BaseBlocks {
-	protected JSONHelper $json_helper;
-	protected array $blocks;
-
-	public function __construct() {
-		$this->json_helper = new JSONHelper();
+	public function init(): void {
+		add_action( 'init', array( $this, 'register_blocks' ) );
+		add_filter( 'allowed_block_types_all', array( $this, 'filter_allowed_blocked_types' ), 10, 2 );
+		add_filter( 'block_categories_all', array( $this, 'filter_block_categories' ), 10, 2 );
 	}
 
-	/**
-	 * Get blocks absolute path
-	 *
-	 * @return string
-	 */
-	abstract protected function get_blocks_path(): string;
+	abstract function get_blocks(): array;
 
-	abstract protected function register_blocks(): void;
+	abstract function get_namespace(): string;
 
-	abstract protected function register_block( array $block ): void;
+	public function register_blocks(): void {
+		if ( function_exists( 'acf_register_block_type' ) ) {
+			foreach ( $this->get_blocks() as $block ) {
+				$class          = $this->get_namespace() . str_replace( '-', '', ucwords( $block, '-' ) );
+				$class_instance = new $class();
 
-	abstract protected function get_default_blocks(): array;
-
-	abstract protected function get_block_namespace(): string;
-
-
-	/**
-	 * Get blocks data
-	 *
-	 * @return array
-	 */
-	public function get_blocks_data(): array {
-		return array_map(
-			function ( string $block_path ) {
-				$block = implode( ' ', (array) file( ( $block_path ) ) );
-				$block = $this->json_helper->validate_json_string( $block );
-
-				$block['full_name'] = $this->get_block_namespace() . $block['name'];
-
-				return $block;
-			},
-			(array) glob( "{$this->get_blocks_path()}/*/manifest.json" )
-		);
+				if ( method_exists( $class_instance, 'get_settings' ) ) {
+					acf_register_block_type( $class_instance->get_settings() );
+				}
+			}
+		}
 	}
 
 	/**
@@ -54,21 +34,14 @@ abstract class BaseBlocks {
 	 *
 	 * @return bool|array Boolean if you want to disable or enable all blocks, or a list of allowed blocks.
 	 */
-	public function get_all_block_list( $allowed_block_types, WP_Block_Editor_Context $block_editor_context ) {
-		if ( 'boolean' === gettype( $allowed_block_types ) ) {
-			return $allowed_block_types;
+	protected function filter_allowed_blocked_types( bool|array $allowed_block_types, WP_Block_Editor_Context $block_editor_context ): bool|array {
+		$blocks = $this->get_default_blocks();
+
+		foreach ( $this->get_blocks() as $block ) {
+			$blocks[] = 'acf/' . $block;
 		}
 
-		$default_blocks = $this->get_default_blocks();
-		$custom_blocks  = array_map(
-			function ( $block ) {
-				return $block['full_name'];
-			},
-			$this->blocks ?? array()
-		);
-
-
-		return array_merge( $default_blocks, $custom_blocks );
+		return $blocks;
 	}
 
 	/**
@@ -77,13 +50,13 @@ abstract class BaseBlocks {
 	 *
 	 * @return array
 	 */
-	public function filter_block_categories( array $block_categories, WP_Block_Editor_Context $block_editor_context ): array {
+	protected function filter_block_categories( array $block_categories, WP_Block_Editor_Context $block_editor_context ): array {
 		if ( ! empty( $block_editor_context->post ) ) {
-			array_push( $block_categories, array(
+			$block_categories[] = array(
 				'slug'  => 'bornfight-blocks',
-				'title' => __( 'Bornfight', 'wp-helpers-bf' ),
+				'title' => 'Bornfight',
 				'icon'  => null,
-			) );
+			);
 		}
 
 		return $block_categories;
