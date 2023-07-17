@@ -26,7 +26,7 @@ abstract class BaseAdminMenu {
 
 	abstract protected function get_menu_slug(): string;
 
-	protected function get_output(): string {
+	protected function get_output(): string|array {
 		return 'Hello World';
 	}
 
