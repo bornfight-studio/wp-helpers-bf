@@ -44,7 +44,7 @@ class ImageProvider {
 	}
 
 	public function get_image_by_size_name( int $image_id, string $size_name ): string {
-		if ( function_exists( 'bfai_get_image_by_size_name' ) ) {
+		if ( function_exists( 'bfai_get_image_by_size_name' ) && $size_name !== 'original' ) {
 			return bfai_get_image_by_size_name( $image_id, $size_name );
 		}
 
