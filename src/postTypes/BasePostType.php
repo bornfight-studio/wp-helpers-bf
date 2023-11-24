@@ -47,7 +47,7 @@ abstract class BasePostType implements ServiceInterface {
 		return array(
 			'labels'              => $labels,
 			'description'         => '',
-			'supports'            => array( 'title', 'editor', 'thumbnail' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions' ),
 			'public'              => true,
 			'show_ui'             => true,
 			'publicly_queryable'  => true,
