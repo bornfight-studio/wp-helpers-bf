@@ -97,6 +97,11 @@ class AssetBundle {
 				$path      = $data['path'];
 				$version   = isset( $data['version'] ) ? $data['version'] : 1.0;
 				$in_footer = isset( $data['in_footer'] ) ? $data['in_footer'] : true;
+				$timestamp_bust = isset( $data['timestamp_bust'] ) && $data['timestamp_bust'] ? $data['timestamp_bust'] : false;
+
+				if ( $timestamp_bust ) {
+					$version .= sprintf( '.%d', filemtime( $this->get_base_path() . $path ) );
+				}
 
 				wp_enqueue_style( $handle, $this->get_base_url() . $path, [], $version, $in_footer );
 			}

@@ -26,7 +26,7 @@ class AdminSubmenuExample extends BaseAdminSubmenu {
 	 *
 	 * @return string
 	 */
-	protected function get_parent_slug(): string {
+	protected function get_parent_slug(): null|string {
 		return 'tools.php';
 	}
 

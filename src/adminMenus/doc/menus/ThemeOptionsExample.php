@@ -29,7 +29,7 @@ class ThemeOptionsExample extends ACFBaseAdminMenu {
 		return self::MENU_POSITION;
 	}
 
-	protected function get_parent_slug(): string {
+	protected function get_parent_slug(): null|string {
 		return '';
 	}
 

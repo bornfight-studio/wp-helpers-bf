@@ -15,5 +15,5 @@ abstract class BaseAdminSubmenu extends BaseAdminMenu {
 		);
 	}
 
-	abstract protected function get_parent_slug(): string;
+	abstract protected function get_parent_slug(): null|string;
 }
