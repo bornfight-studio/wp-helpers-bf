@@ -2,62 +2,64 @@
 
 namespace bornfight\wpHelpers\bundles;
 
-class AssetBundle {
-	protected static $include_base_path = '/static/';
+class AssetBundle
+{
 
-	public array $js = array();
-	public array $css = array();
+protected static $include_base_path = '/static/';
 
-	public bool $async_css = false;
+    public array $js  = array();
+    public array $css = array();
 
-	public function get_base_url() {
-		return INCLUDE_URL . self::$include_base_path;
-	}
+    public bool $async_css = false;
 
-	public function get_base_path() {
-		return get_theme_file_path( self::$include_base_path );
-	}
+    public function get_base_url() {
+        return INCLUDE_URL . self::$include_base_path;
+    }
 
-	public static function register() {
-		$bundle = new static();
-		$bundle->enqueue_scripts();
-		$bundle->enqueue_styles();
-	}
+    public function get_base_path() {
+        return get_theme_file_path( self::$include_base_path );
+    }
 
-	protected function enqueue_scripts() {
-		foreach ( $this->js as $handle => $data ) {
-			if ( isset( $data['path'] ) === false ) {
-				throw new \Exception( 'Missing path definition for ' . $handle );
-			}
+    public static function register() {
+        $bundle = new static();
+        $bundle->enqueue_scripts();
+        $bundle->enqueue_styles();
+    }
 
-			$path           = $data['path'];
-			$version        = isset( $data['version'] ) ? $data['version'] : 1.0;
-			$timestamp_bust = isset( $data['timestamp_bust'] ) && $data['timestamp_bust'] ? $data['timestamp_bust'] : false;
-			$in_footer      = isset( $data['in_footer'] ) ? $data['in_footer'] : true;
+    protected function enqueue_scripts() {
+        foreach ( $this->js as $handle => $data ) {
+            if ( isset( $data['path'] ) === false ) {
+                throw new \Exception( 'Missing path definition for ' . $handle );
+            }
 
-			if ( $timestamp_bust ) {
-				$version .= sprintf( '.%d', filemtime( $this->get_base_path() . $path ) );
-			}
+            $path           = $data['path'];
+            $version        = isset( $data['version'] ) ? $data['version'] : 1.0;
+            $timestamp_bust = isset( $data['timestamp_bust'] ) && $data['timestamp_bust'] ? $data['timestamp_bust'] : false;
+            $in_footer      = isset( $data['in_footer'] ) ? $data['in_footer'] : true;
 
-			wp_enqueue_script( $handle, $this->get_base_url() . $path, [], $version, $in_footer );
+            if ( $timestamp_bust ) {
+                $version .= sprintf( '.%d', filemtime( $this->get_base_path() . $path ) );
+            }
 
-			if ( isset( $data['localize'] ) ) {
-				if ( isset( $data['localize']['object'] ) === false ) {
-					throw new \Exception( 'Missing object name for localize ' . $handle );
-				}
+            wp_enqueue_script( $handle, $this->get_base_url() . $path, array(), $version, $in_footer );
 
-				$localize_data = isset( $data['localize']['data'] ) ? $data['localize']['data'] : array();
+            if ( isset( $data['localize'] ) ) {
+                if ( isset( $data['localize']['object'] ) === false ) {
+                    throw new \Exception( 'Missing object name for localize ' . $handle );
+                }
 
-				wp_localize_script( $handle, $data['localize']['object'], $localize_data );
-			}
+                $localize_data = isset( $data['localize']['data'] ) ? $data['localize']['data'] : array();
 
-		}
-	}
+                wp_localize_script( $handle, $data['localize']['object'], $localize_data );
+            }
 
-	protected function enqueue_styles() {
-		if ( $this->async_css ) {
-			add_action( 'wp_head', function () {
-				?>
+        }
+    }
+
+    protected function enqueue_styles() {
+        if ( $this->async_css ) {
+            add_action( 'wp_head', function () {
+                ?>
                 <script>
                     function loadCSS(e, n, o, t) {
                         "use strict";
@@ -74,32 +76,37 @@ class AssetBundle {
                     }
 
                     // CSS DEV
-					<?php foreach ($this->css as $handle => $data) { ?>
-                    loadCSS("<?= $this->get_base_url() . $data['path']; ?>");
+					<?php foreach ( $this->css as $handle => $data ) { ?>
+                    loadCSS("<?php echo $this->get_base_url() . $data['path']; ?>");
 					<?php } ?>
                 </script>
                 <noscript>
                     <!-- CSS DEV -->
 					<?php
-					foreach ( $this->css as $handle => $data ) { ?>
-                        <link rel="stylesheet" href="<?= $this->get_base_url() . $data['path']; ?>">
+                    foreach ( $this->css as $handle => $data ) { ?>
+                        <link rel="stylesheet" href="<?php echo $this->get_base_url() . $data['path']; ?>">
 						<?php
-					} ?>
+                    } ?>
                 </noscript>
 				<?php
-			} );
-		} else {
-			foreach ( $this->css as $handle => $data ) {
-				if ( isset( $data['path'] ) === false ) {
-					throw new \Exception( 'Missing path definition for ' . $handle );
-				}
+            } );
+        } else {
+            foreach ( $this->css as $handle => $data ) {
+                if ( isset( $data['path'] ) === false ) {
+                    throw new \Exception( 'Missing path definition for ' . $handle );
+                }
 
-				$path      = $data['path'];
-				$version   = isset( $data['version'] ) ? $data['version'] : 1.0;
-				$in_footer = isset( $data['in_footer'] ) ? $data['in_footer'] : true;
+                $path           = $data['path'];
+                $version        = isset( $data['version'] ) ? $data['version'] : 1.0;
+                $timestamp_bust = isset( $data['timestamp_bust'] ) && $data['timestamp_bust'] ? $data['timestamp_bust'] : false;
+                $in_footer      = isset( $data['in_footer'] ) ? $data['in_footer'] : true;
 
-				wp_enqueue_style( $handle, $this->get_base_url() . $path, [], $version, $in_footer );
-			}
-		}
-	}
+                if ( $timestamp_bust ) {
+                    $version .= sprintf( '.%d', filemtime( $this->get_base_path() . $path ) );
+                }
+
+                wp_enqueue_style( $handle, $this->get_base_url() . $path, array(), $version, $in_footer );
+            }
+        }
+    }
 }
