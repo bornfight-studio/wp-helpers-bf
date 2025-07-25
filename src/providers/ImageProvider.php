@@ -50,4 +50,19 @@ class ImageProvider {
 
 		return wp_get_attachment_url( $image_id );
 	}
+
+
+	public function get_obj_by_size_name( int $image_id, string $size_name ): array {
+		if ( function_exists( 'bfai_get_image_by_size_name' ) && $size_name !== 'original' ) {
+			$url = bfai_get_image_by_size_name( $image_id, $size_name );
+			$meta = wp_getimagesize( $url );
+			return [$url,$meta[0],$meta[1]];
+		}
+
+		$url = wp_get_attachment_url( $image_id );
+		$meta = wp_getimagesize( $url );
+		$width = $meta[0] ?? 0;
+		$height = $meta[1] ?? 0;
+		return [$url,$width,$height];
+	}
 }
