@@ -15,7 +15,8 @@ abstract class BaseAdminMenu {
 			$this->get_menu_slug(),
 			$this->get_output(),
 			$this->get_icon_url(),
-			$this->get_position() );
+			$this->get_position()
+		);
 	}
 
 	abstract protected function get_page_title(): string;

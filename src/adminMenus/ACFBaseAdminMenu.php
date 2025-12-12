@@ -7,7 +7,12 @@ namespace bornfight\wpHelpers\adminMenus;
  */
 abstract class ACFBaseAdminMenu extends BaseAdminMenu {
 	public function register(): void {
-		$this->register_menu();
+		add_action(
+			'acf/init',
+			function () {
+				$this->register_menu();
+			}
+		);
 	}
 
 	public function register_menu(): void {
@@ -87,6 +92,6 @@ abstract class ACFBaseAdminMenu extends BaseAdminMenu {
 	 * @return string
 	 */
 	protected function get_update_button_message(): string {
-		return __( "Options Updated", 'acf' );
+		return __( 'Options Updated', 'acf' );
 	}
 }
