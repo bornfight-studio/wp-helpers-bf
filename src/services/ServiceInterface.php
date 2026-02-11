@@ -2,7 +2,7 @@
 
 namespace bornfight\wpHelpers\services;
 
-interface ServiceInterface {
-	public function register(): void;
-	public function __register(): void;
+interface ServiceInterface
+{
+    public function register(): void;
 }
