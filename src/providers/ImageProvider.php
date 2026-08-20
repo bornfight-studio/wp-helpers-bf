@@ -51,18 +51,47 @@ class ImageProvider {
 		return wp_get_attachment_url( $image_id );
 	}
 
-
 	public function get_obj_by_size_name( int $image_id, string $size_name ): array {
 		if ( function_exists( 'bfai_get_image_by_size_name' ) && $size_name !== 'original' ) {
-			$url = bfai_get_image_by_size_name( $image_id, $size_name );
-			$meta = wp_getimagesize( $url );
-			return [$url,$meta[0],$meta[1]];
+			$url  = bfai_get_image_by_size_name( $image_id, $size_name );
+			$meta = $this->get_local_image_size( $url );
+
+			return [ $url, $meta[0], $meta[1] ];
 		}
 
-		$url = wp_get_attachment_url( $image_id );
-		$meta = wp_getimagesize( $url );
-		$width = $meta[0] ?? 0;
-		$height = $meta[1] ?? 0;
-		return [$url,$width,$height];
+		// The attachment metadata already carries the original dimensions.
+		// Never getimagesize() a URL here: PHP downloads the whole file, so
+		// every render fires loopback HTTP requests for its own uploads.
+		$image = wp_get_attachment_image_src( $image_id, 'full' );
+
+		if ( ! empty( $image[0] ) ) {
+			return [ $image[0], (int) ( $image[1] ?? 0 ), (int) ( $image[2] ?? 0 ) ];
+		}
+
+		return [ (string) wp_get_attachment_url( $image_id ), 0, 0 ];
+	}
+
+	/**
+	 * Read image dimensions from the local uploads copy of a URL instead of
+	 * re-downloading the file over HTTP.
+	 *
+	 * @return array{0: int, 1: int} width and height, zeros when unknown
+	 */
+	private function get_local_image_size( string $url ): array {
+		$uploads = wp_get_upload_dir();
+
+		if ( ! empty( $uploads['baseurl'] ) && str_starts_with( $url, $uploads['baseurl'] ) ) {
+			$path = $uploads['basedir'] . substr( $url, strlen( $uploads['baseurl'] ) );
+
+			if ( is_readable( $path ) ) {
+				$meta = wp_getimagesize( $path );
+
+				if ( ! empty( $meta[0] ) ) {
+					return [ (int) $meta[0], (int) $meta[1] ];
+				}
+			}
+		}
+
+		return [ 0, 0 ];
 	}
 }
